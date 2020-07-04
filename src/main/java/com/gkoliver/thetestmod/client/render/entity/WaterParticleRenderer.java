@@ -19,8 +19,8 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class WaterParticleRenderer extends EntityRenderer<WaterParticleEntity>{
 	private static final ResourceLocation WATER_TEXTURE = new ResourceLocation(TheTestMod.MODID, "textures/entity/water_particle.png");
-	   private static final RenderType RENDERTYPE = RenderType.getEntityCutoutNoCull(WATER_TEXTURE);
-	protected WaterParticleRenderer(EntityRendererManager renderManager) {
+	private static final RenderType RENDERTYPE = RenderType.getEntityCutoutNoCull(WATER_TEXTURE);
+	public WaterParticleRenderer(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
 	public void render(WaterParticleEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
