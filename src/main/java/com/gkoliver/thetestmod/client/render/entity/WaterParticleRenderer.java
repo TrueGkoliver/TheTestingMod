@@ -23,7 +23,6 @@ public class WaterParticleRenderer extends EntityRenderer<WaterParticleEntity>{
 	protected WaterParticleRenderer(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
-	
 	public void render(WaterParticleEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
 	      matrixStackIn.push();
 	      matrixStackIn.scale(2.0F, 2.0F, 2.0F);
