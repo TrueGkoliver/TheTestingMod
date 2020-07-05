@@ -5,6 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,9 +48,8 @@ public class TheTestMod
         eventBus.addListener(this::onSetup);
     }
     
+    
     public static void registerAllMobs() {
-
-    	
     	for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
     		for (EntityType entity_type : ForgeRegistries.ENTITIES.getValues()) {
     			Random rand = new Random();
@@ -78,8 +79,9 @@ public class TheTestMod
     		}
     	}
     }
-    private void onSetup(final FMLCommonSetupEvent event) {
-		TheTestMod.registerAllMobs();
+    @OnlyIn(Dist.CLIENT)
+    private void onSetup(final FMLClientSetupEvent event) {
+		TestEntities.clientSetup();
 	}
 
 

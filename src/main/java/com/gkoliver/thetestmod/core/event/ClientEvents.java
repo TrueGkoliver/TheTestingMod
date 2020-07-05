@@ -13,9 +13,5 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid=TheTestMod.MODID, bus=Bus.MOD, value=Dist.CLIENT)
 public class ClientEvents {
-	@SubscribeEvent
-	public static void clientSetup(final FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(TestEntities.WATER_PARTICLE.get(), WaterParticleRenderer::new);
-	}
-
+	
 }
