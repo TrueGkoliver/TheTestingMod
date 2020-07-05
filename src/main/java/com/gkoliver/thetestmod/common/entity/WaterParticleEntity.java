@@ -25,7 +25,7 @@ public class WaterParticleEntity extends Entity {
 			this.remove();
 		}
 		if (!this.onGround) {
-			this.addVelocity(0, 9.8/20, 0);
+			this.setMotion(this.getMotion().add(0.0D, -0.04D, 0.0D));
 		}
 		super.tick();
 	}
@@ -33,9 +33,10 @@ public class WaterParticleEntity extends Entity {
 	public static void createNewEntity(double x, double y, double z, double vX, double vY, double vZ) {}
 	public static WaterParticleEntity createNewEntity(Entity entityIn, double vX, double vY, double vZ, double sizeAway) {
 		System.out.println("createNewEntity");
-		WaterParticleEntity tbr = new WaterParticleEntity(entityIn.world);
+		WaterParticleEntity tbr = new WaterParticleEntity(entityIn.getEntityWorld());
 		tbr.reAdjustLook(entityIn, sizeAway);
 		tbr.setVelocity(vX, vY, vZ);
+		entityIn.getEntityWorld().addEntity(tbr);
 		return tbr;
 	}
 	public void reAdjustLook(Entity entityIn, double sizeAway) {

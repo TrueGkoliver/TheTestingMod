@@ -18,13 +18,15 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
 public class WaterParticleRenderer extends EntityRenderer<WaterParticleEntity>{
-	private static final ResourceLocation WATER_TEXTURE = new ResourceLocation(TheTestMod.MODID, "textures/entity/water_particle.png");
+	private static final ResourceLocation WATER_TEXTURE = new ResourceLocation(TheTestMod.MODID+":textures/entity/water_particle.png");
 	private static final RenderType RENDERTYPE = RenderType.getEntityCutoutNoCull(WATER_TEXTURE);
 	public WaterParticleRenderer(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
+	@Override
 	public void render(WaterParticleEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		  matrixStackIn.push();
+		System.out.println("BINDING");  
+		matrixStackIn.push();
 	      matrixStackIn.scale(2.0F, 2.0F, 2.0F);
 	      matrixStackIn.rotate(this.renderManager.getCameraOrientation());
 	      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
