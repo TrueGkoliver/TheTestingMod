@@ -22,6 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gkoliver.thetestmod.core.registry.TestEntities;
 import com.gkoliver.thetestmod.core.registry.TestItems;
 
 import java.util.Random;
@@ -39,6 +40,7 @@ public class TheTestMod
     public TheTestMod() {
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         TestItems.ITEMS.register(eventBus);
+        TestEntities.ENTITIES.register(eventBus);
         eventBus.addListener(this::onSetup);
     }
     

@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class WaterParticleEntity extends Entity {
@@ -30,12 +32,14 @@ public class WaterParticleEntity extends Entity {
 	public static void createNewEntity(double x, double y, double z, double vX, double vZ) {}
 	public static void createNewEntity(double x, double y, double z, double vX, double vY, double vZ) {}
 	public static WaterParticleEntity createNewEntity(Entity entityIn, double vX, double vY, double vZ, double sizeAway) {
+		System.out.println("createNewEntity");
 		WaterParticleEntity tbr = new WaterParticleEntity(entityIn.world);
 		tbr.reAdjustLook(entityIn, sizeAway);
 		tbr.setVelocity(vX, vY, vZ);
 		return tbr;
 	}
 	public void reAdjustLook(Entity entityIn, double sizeAway) {
+		System.out.println("reAdjustLook");
 		this.setPosition(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ());
 		double pitch = entityIn.rotationPitch;
 		double yaw = entityIn.rotationYaw;
@@ -62,7 +66,8 @@ public class WaterParticleEntity extends Entity {
 
 	@Override
 	public IPacket<?> createSpawnPacket() {
-		return null;
+		int i = 0;
+		return new SSpawnObjectPacket(this.getEntityId(), this.getUniqueID(), this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationPitch, this.rotationYaw, this.getType(), i, new Vector3d(0, -9.8, 0));
 	}
 
 }
