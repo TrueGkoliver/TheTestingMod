@@ -8,6 +8,8 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
@@ -15,6 +17,7 @@ public class WaterParticleEntity extends Entity {
 	double velocityDownwards;
 	public WaterParticleEntity(World worldIn) {
 		super(TestEntities.WATER_PARTICLE.get(), worldIn);
+		
 	}
 	public WaterParticleEntity(EntityType<? extends WaterParticleEntity> entityTypeIn, World worldIn) {
 		super(entityTypeIn, worldIn);
@@ -32,15 +35,16 @@ public class WaterParticleEntity extends Entity {
 	public static void createNewEntity(double x, double y, double z, double vX, double vZ) {}
 	public static void createNewEntity(double x, double y, double z, double vX, double vY, double vZ) {}
 	public static WaterParticleEntity createNewEntity(Entity entityIn, double vX, double vY, double vZ, double sizeAway) {
-		System.out.println("createNewEntity");
+		//System.out.println("createNewEntity");
 		WaterParticleEntity tbr = new WaterParticleEntity(entityIn.getEntityWorld());
 		tbr.reAdjustLook(entityIn, sizeAway);
 		tbr.setVelocity(vX, vY, vZ);
 		entityIn.getEntityWorld().addEntity(tbr);
 		return tbr;
 	}
+	
 	public void reAdjustLook(Entity entityIn, double sizeAway) {
-		System.out.println("reAdjustLook");
+		//System.out.println("reAdjustLook");
 		this.setPosition(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ());
 		double pitch = entityIn.rotationPitch;
 		double yaw = entityIn.rotationYaw;

@@ -39,7 +39,7 @@ public class TheTestMod
 {
 	public static final String MODID = "gkolivers_tests";
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public TheTestMod() {
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

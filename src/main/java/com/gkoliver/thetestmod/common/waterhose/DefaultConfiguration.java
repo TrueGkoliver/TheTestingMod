@@ -9,7 +9,7 @@ public class DefaultConfiguration implements IWaterHoseType {
 	public DefaultConfiguration() {}
 	@Override
 	public void doShoot(World worldIn, LivingEntity entityIn) {
-		System.out.println("doShoot");
+		//System.out.println("doShoot");
 		double vX = entityIn.getLookVec().getX()*this.getVelocity();
 		double vY = entityIn.getLookVec().getY()*this.getVelocity();
 		double vZ = entityIn.getLookVec().getZ()*this.getVelocity();
