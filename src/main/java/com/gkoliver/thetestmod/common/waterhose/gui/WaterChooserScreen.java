@@ -1,4 +1,12 @@
 package com.gkoliver.thetestmod.common.waterhose.gui;
 
-public class WaterChooserScreen {
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.text.ITextComponent;
+
+public class WaterChooserScreen extends Screen {
+    protected WaterChooserScreen(ITextComponent titleIn) {
+        super(titleIn);
+    }
+    public void init() {}
+
 }
