@@ -4,6 +4,7 @@ import com.gkoliver.thetestmod.TheTestMod;
 import com.gkoliver.thetestmod.client.render.entity.WaterParticleRenderer;
 import com.gkoliver.thetestmod.core.registry.TestEntities;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,5 +24,6 @@ public class ClientEvents {
 		TheTestMod.LOGGER.debug("PLEASE LOG THIS I BEG");
 		TheTestMod.LOGGER.debug("PLEASE LOG THIS I BEG");
 		RenderingRegistry.registerEntityRenderingHandler(TestEntities.WATER_PARTICLE.get(), (dispatcher)->new WaterParticleRenderer(dispatcher));
+		System.out.println();
 	}
 }

@@ -20,7 +20,7 @@ public class TestEntities {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, TheTestMod.MODID);
 	
 	public static final RegistryObject<EntityType<WaterParticleEntity>> WATER_PARTICLE = ENTITIES.register("water_particle", ()->EntityType.Builder.<WaterParticleEntity>create(WaterParticleEntity::new, EntityClassification.MISC)
-			.size(0.2F, 0.2F).build(new ResourceLocation(TheTestMod.MODID, "water_particle").toString()));
+			.size(1F, 1F).build(new ResourceLocation(TheTestMod.MODID, "water_particle").toString()));
 	@OnlyIn(Dist.CLIENT)
 	public static void clientSetup() {
 		RenderingRegistry.registerEntityRenderingHandler(TestEntities.WATER_PARTICLE.get(), WaterParticleRenderer::new);

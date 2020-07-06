@@ -8,4 +8,5 @@ public interface IWaterHoseType {
 	public void doShoot(World worldIn, LivingEntity entityIn);
 	public double getVelocity();
 	public EWaterHoseType getType();
+	public int getId();
 }

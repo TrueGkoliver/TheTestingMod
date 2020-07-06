@@ -1,7 +1,10 @@
 package com.gkoliver.thetestmod.common.entity;
 
+import com.gkoliver.thetestmod.common.packets.WaterParticleSpawnPacket;
 import com.gkoliver.thetestmod.core.registry.TestEntities;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -15,21 +18,34 @@ import net.minecraft.world.World;
 
 public class WaterParticleEntity extends Entity {
 	double velocityDownwards;
+	private Entity shooter;
+	private double distAway;
 	public WaterParticleEntity(World worldIn) {
 		super(TestEntities.WATER_PARTICLE.get(), worldIn);
 		
 	}
 	public WaterParticleEntity(EntityType<? extends WaterParticleEntity> entityTypeIn, World worldIn) {
 		super(entityTypeIn, worldIn);
+		
 	}
+
+	public static WaterParticleEntity createNewEntity(World world, double x, double y, double z, int speedX, int speedY, int speedZ) {
+		WaterParticleEntity tbr = new WaterParticleEntity(world);
+		tbr.setPosition(x, y, z);
+		tbr.setMotion(speedX, speedY, speedZ);
+		return tbr;
+	}
+
 	@Override
 	public void tick() {
-		if (this.getPosY()<=-40) {
+		if (this.getPosY() <= -40) {
 			this.remove();
 		}
-		if (!this.onGround) {
+		if (!this.isAirBorne) {
 			this.setMotion(this.getMotion().add(0.0D, -0.04D, 0.0D));
+			this.setPosition(this.getPosX() + this.getMotion().x, this.getPosY() + this.getMotion().y, this.getPosZ() + this.getMotion().z);
 		}
+
 		super.tick();
 	}
 	public static void createNewEntity(double x, double y, double z, double vX, double vZ) {}
@@ -37,12 +53,19 @@ public class WaterParticleEntity extends Entity {
 	public static WaterParticleEntity createNewEntity(Entity entityIn, double vX, double vY, double vZ, double sizeAway) {
 		//System.out.println("createNewEntity");
 		WaterParticleEntity tbr = new WaterParticleEntity(entityIn.getEntityWorld());
-		tbr.reAdjustLook(entityIn, sizeAway);
+		tbr.shooter = entityIn;
+		tbr.distAway = sizeAway;
+		//tbr.reAdjustLook(entityIn, sizeAway);
+		tbr.reAdjustPosition(entityIn);
 		tbr.setVelocity(vX, vY, vZ);
 		entityIn.getEntityWorld().addEntity(tbr);
 		return tbr;
 	}
-	
+	public void reAdjustPosition(Entity entityIn) {
+		this.setPosition(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ());
+		this.rotationPitch = entityIn.rotationPitch;
+		this.rotationYaw = entityIn.rotationYaw;
+	}
 	public void reAdjustLook(Entity entityIn, double sizeAway) {
 		//System.out.println("reAdjustLook");
 		this.setPosition(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ());
@@ -72,7 +95,7 @@ public class WaterParticleEntity extends Entity {
 	@Override
 	public IPacket<?> createSpawnPacket() {
 		int i = 0;
-		return new SSpawnObjectPacket(this.getEntityId(), this.getUniqueID(), this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationPitch, this.rotationYaw, this.getType(), i, new Vector3d(0, -9.8, 0));
+		return new WaterParticleSpawnPacket(this.shooter, distAway, this.getEntityId(), this.getUniqueID(), this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationPitch, this.rotationYaw, this.getType(), 0, new Vector3d(0, 0, 0));
 	}
 
 }
