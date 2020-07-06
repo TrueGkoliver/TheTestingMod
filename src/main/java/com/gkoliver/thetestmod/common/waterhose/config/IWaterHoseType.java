@@ -1,7 +1,6 @@
-package com.gkoliver.thetestmod.common.waterhose;
+package com.gkoliver.thetestmod.common.waterhose.config;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 public interface IWaterHoseType {

@@ -1,4 +1,4 @@
-package com.gkoliver.thetestmod.common.waterhose;
+package com.gkoliver.thetestmod.common.waterhose.config;
 
 import java.util.HashMap;
 

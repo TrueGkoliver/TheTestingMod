@@ -1,5 +1,7 @@
 package com.gkoliver.thetestmod.common.waterhose;
 
+import com.gkoliver.thetestmod.common.waterhose.config.Configurations;
+import com.gkoliver.thetestmod.common.waterhose.config.IWaterHoseType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -20,7 +22,16 @@ public class WaterhoseItem extends Item {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 	}
-
+	public static void setConfiguration(ItemStack stackIn, IWaterHoseType config) {
+		int id = config.getId();
+		CompoundNBT nbt = stackIn.getTag();
+		if (nbt == null) { nbt = new CompoundNBT();}
+		CompoundNBT data = nbt.getCompound("hoseData");
+		if (data == null) { data = new CompoundNBT(); }
+		data.putInt("configuration", id);
+		nbt.put("hoseData", data);
+		stackIn.setTag(nbt);
+	}
 	public static IWaterHoseType getConfiguration(ItemStack stackIn) {
 		CompoundNBT nbt = stackIn.getTag();
 		if (nbt == null) {
@@ -34,16 +45,7 @@ public class WaterhoseItem extends Item {
 		if (tbr==null) { return Configurations.CONFIG_DEFAULT; }
 		return tbr;
 	}
-	public static void setConfiguration(ItemStack stackIn, IWaterHoseType config) {
-		int id = config.getId();
-		CompoundNBT nbt = stackIn.getTag();
-		if (nbt == null) { nbt = new CompoundNBT();}
-		CompoundNBT data = nbt.getCompound("hoseData");
-		if (data == null) { data = new CompoundNBT(); }
-		data.putInt("configuration", id);
-		nbt.put("hoseData", data);
-		stackIn.setTag(nbt);
-	}
+
 
 	/**
 	 * Sets the intensity
@@ -72,7 +74,8 @@ public class WaterhoseItem extends Item {
 		if (playerIn.isCrouching()) {
 
 		} else {
-			Configurations.CONFIG_DEFAULT.doShoot(worldIn, playerIn);
+			getConfiguration(playerIn.getHeldItem(handIn)).doShoot(worldIn, playerIn);
+			//Configurations.CONFIG_DEFAULT.doShoot(worldIn, playerIn);
 		}
 
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
