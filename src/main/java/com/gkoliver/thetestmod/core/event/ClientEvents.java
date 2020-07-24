@@ -15,7 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid=TheTestMod.MODID, bus=Bus.MOD, value=Dist.CLIENT)
 public class ClientEvents {
-	@SubscribeEvent
+	//@SubscribeEvent
     public static void onSetup(final FMLClientSetupEvent event) {
 		TheTestMod.LOGGER.debug("PLEASE LOG THIS I BEG");
 		TheTestMod.LOGGER.debug("PLEASE LOG THIS I BEG");

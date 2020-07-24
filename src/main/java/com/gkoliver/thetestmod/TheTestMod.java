@@ -2,8 +2,10 @@ package com.gkoliver.thetestmod;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.SharedConstants;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,6 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -29,6 +32,7 @@ import com.gkoliver.thetestmod.client.render.entity.WaterParticleRenderer;
 import com.gkoliver.thetestmod.core.registry.TestEntities;
 import com.gkoliver.thetestmod.core.registry.TestItems;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -43,11 +47,14 @@ public class TheTestMod
 
     public TheTestMod() {
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		SharedConstants.developmentMode = true;
         TestItems.ITEMS.register(eventBus);
-        TestEntities.ENTITIES.register(eventBus);
-        eventBus.addListener(this::onSetup);
+        //TestEntities.ENTITIES.register(eventBus);
+        //eventBus.addListener(this::onSetup);
+
     }
-    
+
+
     
     public static void registerAllMobs() {
     	for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
