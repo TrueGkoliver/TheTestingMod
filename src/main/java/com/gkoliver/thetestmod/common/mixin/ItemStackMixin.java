@@ -24,7 +24,7 @@ public class ItemStackMixin {
     }
     //Thank you to the Forge project discord for aggressively telling me how to do this.
     //Note to self: Never ask another question to them again.
-    @Inject(method = "shrink", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "net.minecraft.item.ItemStack.shrink(I)V", at = @At("HEAD"), cancellable = true)
     public void check(CallbackInfo ci) {
         if (true) {
             System.out.println("This is an extremely boring check.");
