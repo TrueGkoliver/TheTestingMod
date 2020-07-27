@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 import com.gkoliver.thetestmod.TheTestMod;
+import com.gkoliver.thetestmod.core.registry.TestEffects;
 import com.gkoliver.thetestmod.core.registry.TestItems;
 
 import net.minecraft.enchantment.Enchantment;
@@ -23,12 +24,24 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid=TheTestMod.MODID)
 public class CommonEvents {
+	@SubscribeEvent
+	public static void onEntityTakeDamage(LivingHurtEvent event) {
+		if (event.getEntityLiving().getActivePotionEffect(TestEffects.STASIS.get())!=null) {
+
+		}
+	}
+	@SubscribeEvent
+	public static void onPotionExpire(PotionEvent.PotionExpiryEvent event) {
+
+	}
 	@SubscribeEvent
 	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
